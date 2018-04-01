@@ -5,6 +5,7 @@ work out whether we're going to support deleting through the UI.
 */
 
 import React, { PropTypes } from 'react';
+import _ from 'lodash';
 import Field from '../Field';
 import cloudinaryResize from '../../../admin/client/utils/cloudinaryResize';
 import { Button, FormField, FormInput, FormNote } from '../../../admin/client/App/elemental';
@@ -57,7 +58,10 @@ module.exports = Field.create({
 	componentWillUpdate (nextProps) {
 		// Reset the action state when the value changes
 		// TODO: We should add a check for a new item ID in the store
-		if ((this.props.value && this.props.value.public_id) !== (nextProps.value && nextProps.value.public_id)) {
+		if (
+			_.get(this.props, 'value.public_id', undefined)
+			!== _.get(nextProps, 'value.public_id', undefined)
+		) {
 			this.setState({
 				removeExisting: false,
 				userSelectedFile: null,
