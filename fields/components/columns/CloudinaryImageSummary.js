@@ -41,7 +41,7 @@ var CloudinaryImageSummary = React.createClass({
 	renderLabel () {
 		if (!this.props.label) return;
 
-		const { label, image } = this.props;
+		const { label, image = {} } = this.props;
 
 		let text;
 		if (label === 'dimensions') {
